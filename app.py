@@ -1,6 +1,6 @@
 import streamlit as st
 import pickle
-import ollama
+from groq import Groq
 from sklearn.metrics.pairwise import cosine_similarity
 
 
@@ -66,26 +66,22 @@ def search_dataset(question):
     return None, score
 
 
-# =========================================================
-# OLLAMA
-# =========================================================
-
-def ask_ollama(question):
+def ask_cloud_ai(question):
 
     try:
+        client = Groq(
+            api_key=st.secrets["GROQ_API_KEY"]
+        )
 
-        response = ollama.chat(
-            model="llama3.2",
+        response = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
             messages=[
                 {
                     "role": "system",
                     "content": """
 You are a helpful AI assistant.
-
 Give simple, clear and accurate answers.
-
-If the question is technical,
-explain it step by step when useful.
+If the question is technical, explain it step by step when useful.
 """
                 },
                 {
@@ -95,16 +91,10 @@ explain it step by step when useful.
             ]
         )
 
-        return response["message"]["content"]
+        return response.choices[0].message.content
 
-    except Exception:
-
-        return (
-            "❌ Ollama is not running.\n\n"
-            "Please start Ollama and try again."
-        )
-
-
+    except Exception as e:
+        return f"❌ AI Error: {e}"
 # =========================================================
 # SIDEBAR
 # =========================================================
@@ -270,9 +260,9 @@ if st.session_state.page == "Home":
                 "🤖 AI is thinking..."
             ):
 
-                answer = ask_ollama(prompt)
+                answer = ask_cloud_ai(prompt)
 
-            source = "🤖 Ollama - Llama 3.2"
+            source = "☁️ Cloud AI - Groq"
 
         final_answer = (
             answer
@@ -431,9 +421,9 @@ elif st.session_state.page == "New Chat":
                 "🤖 AI is thinking..."
             ):
 
-                answer = ask_ollama(prompt)
+                answer = ask_cloud_ai(prompt)
 
-            source = "🤖 Ollama - Llama 3.2"
+            source = "☁️ Cloud AI - Groq"
 
         final_answer = (
             answer
