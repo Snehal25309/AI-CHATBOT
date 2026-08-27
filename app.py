@@ -572,7 +572,7 @@ with c3:
 st.markdown(
     """
     <div class="footer">
-        © 2026 AI Chatbot | Built with Streamlit + Ollama
+        © 2026 AI Chatbot | Built with Streamlit + Python + NLP + Groq AI
     </div>
     """,
     unsafe_allow_html=True
