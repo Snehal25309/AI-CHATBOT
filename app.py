@@ -487,7 +487,7 @@ elif st.session_state.page == "Settings":
     st.subheader("🤖 AI Model")
 
     st.info(
-        "Current Model: Llama 3.2"
+        "Current Model: GPT-OSS 20B"
     )
 
     st.subheader("📚 Dataset")
