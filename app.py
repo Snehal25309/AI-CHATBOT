@@ -227,7 +227,7 @@ if st.session_state.page == "Home":
             st.write(message["content"])
 
     prompt = st.chat_input(
-        "Type your message here...",
+        "Ask Anything...",
         key="home_chat_input"
     )
 
@@ -391,7 +391,7 @@ elif st.session_state.page == "New Chat":
     # =====================================================
 
     prompt = st.chat_input(
-        "Type your message here...",
+        "Ask Anything...",
         key="new_chat_input"
     )
 
