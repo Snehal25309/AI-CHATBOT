@@ -200,7 +200,7 @@ if st.session_state.page == "Home":
     with col3:
         st.metric(
             "🤖 AI Model",
-            "Llama 3.2"
+            "GPT-OSS 20B"
         )
 
     with col4:
